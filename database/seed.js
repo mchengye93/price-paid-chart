@@ -1,8 +1,27 @@
 const Sequelize = require('sequelize');
 const request = require('request');
+const mysql = require('mysql');
+
+var database = mysql.createConnection({
+  host: '172.17.0.3',
+  user: 'root',
+  password: '',
+  multipleStatements: true
+});
+
+
+database.query('DROP DATABASE IF EXISTS price_paid_chart; CREATE DATABASE price_paid_chart', function(err, rows, field){
+  if (err) {
+    throw err;
+  } else {
+    database.destroy();
+  }
+});
 
 let db = new Sequelize('price_paid_chart', 'root', '', {
-  dialect: 'mysql', dialectOptions: {
+  host: '172.17.0.3',
+  dialect: 'mysql', 
+  dialectOptions: {
     supportBigNumbers: true
   }
 });
@@ -34,7 +53,7 @@ let Increments = db.define('increments', {
 // FYI, this API call will fail after June 1, 2019. The old API is deprecated. 
 db.sync({force: true}).then(() => {
   request({
-    url: 'https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=Technology',
+    url: 'https://cloud.iexapis.com/v1/stock/market/collection/sector?collectionName=Technology&token=pk_0731786ef98d4600991894316555c35f',
     headers: {
       'Content-type': 'application/json'
     }

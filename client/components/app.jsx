@@ -58,7 +58,7 @@ class App extends Component {
         <div>
           <h2>Price Paid on Robinhood</h2>
           <svg height="20" width="676">
-            <line y1="0" y2="0" x1="0" x2="676" stroke="black" fill="black"></line>
+            <line y1="0" y2="0" x1="0" x2="676" stroke="white" fill="white"></line>
           </svg>
           <MainChart 
             stockData = {this.state.stockData} 

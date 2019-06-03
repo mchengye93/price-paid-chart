@@ -11,7 +11,7 @@ function getRandomArbitrary(min, max) {
 }
 
 var db = mysql.createConnection({
-  host: 'localhost',
+  host: '172.17.0.3',
   user: 'root',
   password: '',
   database: 'price_paid_chart'
@@ -101,5 +101,9 @@ app.get('/api/stocks/test', (req, res) => {
       res.send(results);
     }
   });
+});
+
+app.get('/test', (req, res) => {
+  res.send('tested');
 });
 module.exports = app;
